@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Main {
+
     static Scanner scan = new Scanner(System.in);
 
     public static int getNumBatters() {
@@ -10,7 +11,6 @@ public class Main {
     }
 
     public static int getAtBat() {
-        System.out.println("Enter number of times At Bat: ");
         int atBat = scan.nextInt();
         return atBat;
     }
@@ -25,12 +25,13 @@ public class Main {
         int count = 0;
         int sum = 0;
         int batCount = 0;
-        int hits = 0;
+        int hits;
 
         batterStats = new int[getNumBatters()][];
         for (int i = 0; i < batterStats.length; i++) {
+            System.out.println("Enter number of times At Bat for Player " + (numBatters +1)+": ");
             int noAtBats = getAtBat();
-            //This code creates the 2nd array.
+            //This is the code that creates the 2nd array.
             batterStats[i] = new int[noAtBats];
             //This code iterates to print from scanner the array
             for (int j = 0; j < noAtBats; j++) {
