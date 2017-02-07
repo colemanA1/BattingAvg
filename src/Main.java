@@ -14,11 +14,28 @@ public class Main {
         int atBat = scan.nextInt();
         return atBat;
     }
+    public static int getValidInteger(){
+        while(!scan.hasNextInt()){
+            //scan.nextLine();
+            System.out.println("Please enter an integer! ");
+        }return scan.nextInt();
+    }
 
+    public static boolean checkRange(int input, int min, int max){
+        if(input<= min||input>=max) {
+            return false;
+        }return true;
+    }
+
+    public static int getValidInteger(int min, int max){
+        int userInput = getValidInteger();
+        while(!checkRange(userInput, min, max)) {
+            System.out.println("Please provide a number within correct range!");
+            userInput = getValidInteger();
+        }return userInput;
+    }
 
     public static void main(String[] args) {
-        System.out.println("WELCOME TO THE BATTING AVG CALCULATOR!!");
-        System.out.println("0 = out, 1 = single, 2 = double, 3 = triple, 4 = home run");
 
         int numBatters = 0;
         int[][] batterStats;
@@ -26,11 +43,12 @@ public class Main {
         int sum = 0;
         int batCount = 0;
         int hits;
+        int noAtBats = getAtBat();
 
+        System.out.println("WELCOME TO THE BATTING AVG CALCULATOR!!");
         batterStats = new int[getNumBatters()][];
         for (int i = 0; i < batterStats.length; i++) {
             System.out.println("Enter number of times At Bat for Player " + (numBatters +1)+": ");
-            int noAtBats = getAtBat();
             //This is the code that creates the 2nd array.
             batterStats[i] = new int[noAtBats];
             //This code iterates to print from scanner the array
@@ -38,6 +56,7 @@ public class Main {
                 System.out.println("0 = out, 1 = single, 2 = double, 3 = triple, 4 = home run");
                 System.out.println("Enter hits on bat " +(batCount + 1) + " for Player " + (numBatters +1) + ": ");
                 hits = scan.nextInt();
+                getValidInteger(-1, 5);
                 if(hits < 5 && hits>0){
                     ++count;
                 }
@@ -46,16 +65,23 @@ public class Main {
                 ++batCount;
             }
             batCount = 0;
+            numBatters++;
 
 
-            double battingAvg = (double)count/(double)noAtBats;
+           /** double battingAvg = (double)count/(double)noAtBats;
             double slugPerc = (double)sum/(double)noAtBats;
             System.out.println("Batting avg for Player " + (numBatters + 1) + " is: "+ battingAvg);
             System.out.println("and the ");
             System.out.println("Slug Percentage for Player " + (numBatters + 1) + " is: "+ slugPerc);
-            numBatters ++;
+            numBatters ++;**/
         }
-
+        double battingAvg = (double)count/(double)noAtBats;
+        double slugPerc = (double)sum/(double)noAtBats;
+        for (int i = 0; i < batterStats.length ; i++){
+            System.out.println("Batting avg for Player " + (numBatters + 1) + " is: " + battingAvg);
+            System.out.println("and the ");
+            System.out.println("Slug Percentage for Player " + (numBatters + 1) + " is: "+ slugPerc);
+        }
     }
 
 }
